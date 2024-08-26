@@ -33,7 +33,7 @@ public class ProductController {
     }
 
     // Mapping for PUT update a product by ID
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
         return productService.updateExistingProduct(id, product);
     }

@@ -41,6 +41,7 @@ public class ProductService {
             existingProduct.setProductDescription(updatedProduct.getProductDescription());
             existingProduct.setProductColour(updatedProduct.getProductColour());
             existingProduct.setProductSize(updatedProduct.getProductSize());
+            return productRepository.save(existingProduct);
         }
         return null;
     }
