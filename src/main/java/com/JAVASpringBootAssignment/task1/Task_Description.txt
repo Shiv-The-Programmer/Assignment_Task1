@@ -1,0 +1,64 @@
+Task-1
+
+CRUD operation for  Product,
+Need to implement the logic for create/delete/retrieve/and update
+using Controller (code, description, name, colour and size)
+
+
+Model
+
+entity
+Product
+1. product_id (ID)
+2. productName
+3. productDescription
+4. productColour
+5. productSize
+
+Repository
+
+interface repository extends JpaRepository
+
+Service
+
+GET
+getProductById(int id){
+    repository.findById(id);
+}
+
+POST
+saveNewProduct(Product product){
+    repository.save(product);
+}
+
+UPDATE
+updateProductById(int id, String description, String name, String size, String colour){
+    Optional<User> user = repository.findById(id);
+            if (user.isPresent()) {
+                user.getProductSize = size;
+                user.getProductColour = colour;
+                // and so on...
+            } else {
+                return;
+            }
+}
+
+DELETE
+deleteProductById(int id){
+    Optional<User> user = repository.findById(id);
+        if (user.isPresent()) {
+            repository.deleteById(id);
+        } else {
+            return;
+        }
+}
+
+Controller
+
+
+retrieveProductById(int id){
+    service.getProductById(id);
+}
+
+
+
