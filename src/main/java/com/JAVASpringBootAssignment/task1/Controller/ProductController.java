@@ -43,4 +43,7 @@ public class ProductController {
     public void deleteProduct(@PathVariable int id) {
         productService.deleteExistingProduct(id);
     }
+
+    // swagger UI to test in browser url -
+    // http://localhost:8080/swagger-ui/index.html
 }
