@@ -1,6 +1,10 @@
 package com.JAVASpringBootAssignment.task1.Model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
+
+import java.util.List;
+import java.util.Map;
 
 
 @Entity
@@ -23,6 +27,17 @@ public class Product {
 
     @Column(name = "productsize") // Matching the database column name
     private String productSize;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "price_id")
+    private Price price;
+
+//    @Transient
+//    @JsonInclude(JsonInclude.Include.NON_NULL)
+//    private Map<CurrencyType,Double> priceInAllCurrencies;
+
+
+
 
     public Product() {
     }
@@ -75,14 +90,45 @@ public class Product {
         this.productSize = productSize;
     }
 
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
+
+
+//    public Map<CurrencyType, Double> getPriceInAllCurrencies() {
+//        return priceInAllCurrencies;
+//    }
+//
+//    public void setPriceInAllCurrencies(Map<CurrencyType, Double> priceInAllCurrencies) {
+//        this.priceInAllCurrencies = priceInAllCurrencies;
+//    }
+
+
+//    @Override
+//    public String toString() {
+//        return "Product{" +
+//                "productID=" + productID +
+//                ", productName='" + productName + '\'' +
+//                ", productDescription='" + productDescription + '\'' +
+//                ", productColour='" + productColour + '\'' +
+//                ", productSize='" + productSize + '\'' +
+//                '}';
+//    }
+
+
     @Override
     public String toString() {
         return "Product{" +
                 "productID=" + productID +
-                ", productName='" + productName + '\'' +
-                ", productDescription='" + productDescription + '\'' +
                 ", productColour='" + productColour + '\'' +
+                ", productDescription='" + productDescription + '\'' +
+                ", productName='" + productName + '\'' +
                 ", productSize='" + productSize + '\'' +
+                ", price=" + price +
                 '}';
     }
 }
