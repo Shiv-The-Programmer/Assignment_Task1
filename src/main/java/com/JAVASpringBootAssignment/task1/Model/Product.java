@@ -32,9 +32,9 @@ public class Product {
     @JoinColumn(name = "price_id")
     private Price price;
 
-//    @Transient
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    private Map<CurrencyType,Double> priceInAllCurrencies;
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Map<CurrencyType,Double> priceInAllCurrencies;
 
 
 
@@ -99,13 +99,13 @@ public class Product {
     }
 
 
-//    public Map<CurrencyType, Double> getPriceInAllCurrencies() {
-//        return priceInAllCurrencies;
-//    }
-//
-//    public void setPriceInAllCurrencies(Map<CurrencyType, Double> priceInAllCurrencies) {
-//        this.priceInAllCurrencies = priceInAllCurrencies;
-//    }
+    public Map<CurrencyType, Double> getPriceInAllCurrencies() {
+        return priceInAllCurrencies;
+    }
+
+    public void setPriceInAllCurrencies(Map<CurrencyType, Double> priceInAllCurrencies) {
+        this.priceInAllCurrencies = priceInAllCurrencies;
+    }
 
 
 //    @Override

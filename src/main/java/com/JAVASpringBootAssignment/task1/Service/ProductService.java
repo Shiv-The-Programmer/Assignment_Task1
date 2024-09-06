@@ -77,8 +77,8 @@ public class ProductService {
         Map<CurrencyType,Double> priceInAllCurrencies = new HashMap<>();
         priceInAllCurrencies.put(baseCurrency,baseAmount);
         priceInAllCurrencies.put(CurrencyType.DOLLAR,convertToDollar(baseAmount,baseCurrency));
-        priceInAllCurrencies.put(CurrencyType.RUPEE,convertToDollar(baseAmount,baseCurrency));
-//        product.setPriceInAllCurrencies(priceInAllCurrencies);
+        priceInAllCurrencies.put(CurrencyType.RUPEE,convertToRupee(baseAmount,baseCurrency));
+        product.setPriceInAllCurrencies(priceInAllCurrencies);
         return product;
 
     }
