@@ -10,6 +10,7 @@ public class Price {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "price_id")
     private int priceId;
+
     @Column(name = "amount")
     private double amount;
 
@@ -17,13 +18,15 @@ public class Price {
     @Column(name = "currency_type")
     private CurrencyType currencyType;
 
-    public Price() {
+    // Getters and Setters
+
+    public int getPriceId() {
+        return priceId;
     }
 
-//    public Price(double amount, CurrencyType currencyType) {
-//        this.amount = amount;
-//        this.currencyType = currencyType;
-//    }
+    public void setPriceId(int priceId) {
+        this.priceId = priceId;
+    }
 
     public double getAmount() {
         return amount;
@@ -44,7 +47,8 @@ public class Price {
     @Override
     public String toString() {
         return "Price{" +
-                "amount=" + amount +
+                "priceId=" + priceId +
+                ", amount=" + amount +
                 ", currencyType=" + currencyType +
                 '}';
     }

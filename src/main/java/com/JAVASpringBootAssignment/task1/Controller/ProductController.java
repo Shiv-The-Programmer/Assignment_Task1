@@ -4,10 +4,13 @@ import com.JAVASpringBootAssignment.task1.Model.CurrencyType;
 import com.JAVASpringBootAssignment.task1.Model.Product;
 import com.JAVASpringBootAssignment.task1.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
@@ -17,43 +20,27 @@ public class ProductController {
     private ProductService productService;
 
     // Mapping for GET all products
-//    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @GetMapping
-    public List<Product> retrieveAllProducts() {
+    public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
     // Mapping for GET a product by ID
-    @GetMapping("/{id}")
-    public Product retrieveProductById(@PathVariable int id) {
+    @GetMapping("/product/{id}")
+    public Product getProductById(@PathVariable int id) {
         return productService.getProductById(id);
     }
 
-    @GetMapping("/{id}/price")
-    public double retrieveProductPrice(@PathVariable int id, @RequestParam CurrencyType currencyType) {
-        return productService.getProductPriceInSpecifiedCurrency(id, currencyType);
+    // Mapping for GET the product price in specified currency
+    @GetMapping("/product/price/{productID}/{currencyType}")
+    public double getProductPriceInSpecifiedCurrency(
+            @PathVariable int productID, @PathVariable CurrencyType currencyType) {
+        return productService.getProductPriceInSpecifiedCurrency(productID, currencyType);
     }
 
-
-    // ###################### Removing create, update and delete rights from normal customer, only admin has the access to do it
-    // Mapping for POST create a new product
-//    @PostMapping
-//    public Product createNewProduct(@RequestBody Product product) {
-//        return productService.saveNewProduct(product);
-//    }
-//
-//    // Mapping for PUT update a product by ID
-//    @PostMapping("/{id}")
-//    public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
-//        return productService.updateExistingProduct(id, product);
-//    }
-//
-//    // Mapping for DELETE a product by ID
-//    @DeleteMapping("/{id}")
-//    public void deleteProduct(@PathVariable int id) {
-//        productService.deleteExistingProduct(id);
-//    }
-
-    // swagger UI to test in browser url -
-    // http://localhost:8080/swagger-ui/index.html
+    // Mapping for GET a product with price in all currencies
+    @GetMapping("/product/with-prices/{id}")
+    public Product retrieveProductWithPricesInAllCurrencies(@PathVariable int id) {
+        return productService.getProductWithPriceInAllCurrencies(id);
+    }
 }
