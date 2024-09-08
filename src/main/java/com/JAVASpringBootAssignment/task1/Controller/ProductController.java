@@ -4,6 +4,7 @@ import com.JAVASpringBootAssignment.task1.Model.CurrencyType;
 import com.JAVASpringBootAssignment.task1.Model.Product;
 import com.JAVASpringBootAssignment.task1.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ProductController {
     private ProductService productService;
 
     // Mapping for GET all products
+//    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @GetMapping
     public List<Product> retrieveAllProducts() {
         return productService.getAllProducts();
