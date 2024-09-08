@@ -1,69 +1,57 @@
 package com.JAVASpringBootAssignment.task1.Controller;
 
-
 import com.JAVASpringBootAssignment.task1.Model.CurrencyType;
-import com.JAVASpringBootAssignment.task1.Model.Price;
 import com.JAVASpringBootAssignment.task1.Model.Product;
 import com.JAVASpringBootAssignment.task1.Service.ProductService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/products/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
     private ProductService productService;
 
     // GET all products
-    @GetMapping
-    public List<Product> retrieveAllProducts() {
+    @GetMapping("/products")
+    public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
     // GET a product by ID
-//    @GetMapping("/{id}")
-//    public Product retrieveProductById(@PathVariable int id) {
-//        return productService.getProductById(id);
-//    }
+    @GetMapping("/product/{id}")
+    public Product getProductById(@PathVariable int id) {
+        return productService.getProductById(id);
+    }
 
-    @GetMapping("/{id}")
+    @GetMapping("/product/price/{productID}/{currencyType}")
+    public double getProductPriceInSpecifiedCurrency(
+            @PathVariable int productID, @PathVariable CurrencyType currencyType) {
+        return productService.getProductPriceInSpecifiedCurrency(productID, currencyType);
+    }
+
+    @GetMapping("/product/with-prices/{id}")
     public Product retrieveProductWithPricesInAllCurrencies(@PathVariable int id) {
         return productService.getProductWithPriceInAllCurrencies(id);
     }
 
-    // GET price by price ID
-    @GetMapping("/price/{priceId}")
-    public Price getPriceById(@PathVariable int priceId) {
-        return productService.getPriceById(priceId);
-    }
-
-    // GET product price in specified currency
-    @GetMapping("/{id}/price")
-    public double retrieveProductPrice(@PathVariable int id, @RequestParam CurrencyType currencyType) {
-        return productService.getProductPriceInSpecifiedCurrency(id, currencyType);
-    }
-
-    // POST create a new product
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Product createNewProduct(@RequestBody @Valid Product product) {
+    // POST a new product
+    @PostMapping("/product")
+    public Product addProduct(@RequestBody Product product) {
         return productService.saveNewProduct(product);
     }
 
-    // PUT update a product by ID
-    @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable int id, @RequestBody @Valid Product product) {
+    // PUT to update an existing product
+    @PutMapping("/product/{id}")
+    public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
         return productService.updateExistingProduct(id, product);
     }
 
     // DELETE a product by ID
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/product/{id}")
     public void deleteProduct(@PathVariable int id) {
         productService.deleteExistingProduct(id);
     }
